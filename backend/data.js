@@ -1,4 +1,18 @@
 const data = {
+    users: [
+        {
+            name: 'Quang Do',
+            email: 'h.quang1200@gmail.com',
+            password: '123123',
+            isAdmin: true,
+        },
+        {
+            name: 'Nhat Le',
+            email: 'lmnhat@gmail.com',
+            password: '123123',
+            isAdmin: false,
+        }
+    ],
     products: [
       {
         _id: '1',
@@ -10,6 +24,7 @@ const data = {
         rating: 4.5,
         numReviews: 10,
         description: 'high quality product',
+        countInStock: 5,
       },
       {
         _id: '2',
@@ -21,17 +36,19 @@ const data = {
         rating: 4.0,
         numReviews: 10,
         description: 'high quality product',
+        countInStock: 5,
       },
       {
         _id: '3',
         name: 'Lacoste Free Shirt',
         category: 'Shirts',
-        image: '/images/shirt-traning.jpg',
+        image: '/images/shirt-training.jpg',
         price: 220,
         brand: 'Lacoste',
         rating: 4.8,
         numReviews: 17,
         description: 'high quality product',
+        countInStock: 5,
       },
       {
         _id: '4',
@@ -43,6 +60,7 @@ const data = {
         rating: 4.5,
         numReviews: 14,
         description: 'high quality product',
+        countInStock: 5,
       },
       {
         _id: '5',
@@ -54,6 +72,7 @@ const data = {
         rating: 4.5,
         numReviews: 10,
         description: 'high quality product',
+        countInStock: 5,
       },
       {
         _id: '6',
@@ -65,6 +84,7 @@ const data = {
         rating: 4.5,
         numReviews: 15,
         description: 'high quality product',
+        countInStock: 5,
       },
     ],
   };
