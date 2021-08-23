@@ -1,21 +1,22 @@
+import bcrypt from 'bcryptjs';
+
 const data = {
     users: [
         {
             name: 'Quang Do',
             email: 'h.quang1200@gmail.com',
-            password: '123123',
+            password: bcrypt.hashSync('123', 8),
             isAdmin: true,
         },
         {
             name: 'Nhat Le',
             email: 'lmnhat@gmail.com',
-            password: '123123',
+            password: bcrypt.hashSync('123', 8),
             isAdmin: false,
         }
     ],
     products: [
       {
-        _id: '1',
         name: 'Nike Slim Shirt',
         category: 'Shirts',
         image: '/images/shirt-classic.jpg',
@@ -27,7 +28,6 @@ const data = {
         countInStock: 5,
       },
       {
-        _id: '2',
         name: 'Adidas Fit Shirt',
         category: 'Shirts',
         image: '/images/shirt-original.jpg',
@@ -39,7 +39,6 @@ const data = {
         countInStock: 5,
       },
       {
-        _id: '3',
         name: 'Lacoste Free Shirt',
         category: 'Shirts',
         image: '/images/shirt-training.jpg',
@@ -51,7 +50,6 @@ const data = {
         countInStock: 5,
       },
       {
-        _id: '4',
         name: 'Nike Slim Pant',
         category: 'Pants',
         image: '/images/shorts-classic.jpg',
@@ -63,7 +61,6 @@ const data = {
         countInStock: 5,
       },
       {
-        _id: '5',
         name: 'Puma Slim Pant',
         category: 'Pants',
         image: '/images/shorts-running.jpg',
@@ -75,7 +72,6 @@ const data = {
         countInStock: 5,
       },
       {
-        _id: '6',
         name: 'Adidas Fit Pant',
         category: 'Pants',
         image: '/images/shorts-original.jpg',
