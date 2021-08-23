@@ -1,6 +1,6 @@
 import { BrowserRouter, Route } from 'react-router-dom';
-import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './screens/ProductScreen';
+import HomePage from './pages/HomePage'
+import ProductPage from './pages/ProductPage';
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
           </div>
           </header>
         <main>
-          <Route path="/product/:id" component={ProductScreen}></Route>
-          <Route path="/" component={HomeScreen} exact></Route>
+          <Route path="/product/:id" component={ProductPage}></Route>
+          <Route path="/" component={HomePage} exact></Route>
         </main>
         <footer className="row center">All right reserved</footer>
       </div>
