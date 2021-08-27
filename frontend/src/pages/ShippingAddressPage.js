@@ -25,7 +25,7 @@ export default function ShippingAddressPage(props) {
         props.history.push('/payment');
     };
     return ( 
-        <div><CheckoutSteps steps1 ></CheckoutSteps> 
+        <div><CheckoutSteps steps1 steps2></CheckoutSteps> 
             <form className = "form" onSubmit={submitHandler}>
                     <div>
                         <h1> Shipping Address </h1>
