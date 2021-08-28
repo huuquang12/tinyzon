@@ -1,5 +1,5 @@
 import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT } 
-from "../constants/userConstant";
+from "../constants/userConstants";
 
 export const userSigninReducer = (state = {}, action) => {
     switch (action.type) {

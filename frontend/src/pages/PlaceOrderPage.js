@@ -1,14 +1,20 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { createOrder } from '../actions/orderActions';
 import CheckoutSteps from '../components/CheckoutSteps';
+import { ORDER_CREATE_RESET } from '../constants/orderConstants';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 export default function PlaceOrderPage(props) {
+    const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
     if(!cart.paymentMethod) {
         props.history.push('/payment');
     };
-
+    const orderCreate = useSelector((state) => state.orderCreate);
+    const { loading, success, error, order } = orderCreate;
     const toPrice = (num) => Number(num.toFixed(2));
     cart.itemsPrice = toPrice(
         cart.cartItems.reduce((a, c) => 
@@ -17,12 +23,18 @@ export default function PlaceOrderPage(props) {
     );
 
     const placeOrderHandler = () => {
-
+        dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
     };
 
     cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
     cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+    useEffect(() => {
+        if(success) {
+            props.history.push(`/order/${order._id}`);
+            dispatch({ type: ORDER_CREATE_RESET });
+        }
+    }, [dispatch, order, props.history, success]);
     return (
         <div>
         <CheckoutSteps steps1 steps2 steps3 steps4></CheckoutSteps>
@@ -33,8 +45,8 @@ export default function PlaceOrderPage(props) {
                             <div className="card card-body">
                                 <h2>Shipping</h2>
                                 <p>
-                                    <strong/>Name: {cart.shippingAddress.fullName}<br/>
-                                    <strong/>Address: {cart.shippingAddress.address},
+                                    <strong>Name:</strong> {cart.shippingAddress.fullName}<br/>
+                                    <strong>Address:</strong> {cart.shippingAddress.address},
                                     {cart.shippingAddress.city}, {cart.shippingAddress.zipCode},
                                     {cart.shippingAddress.country}
                                 </p>
@@ -44,7 +56,7 @@ export default function PlaceOrderPage(props) {
                             <div className="card card-body">
                                 <h2>Payment</h2>
                                 <p>
-                                    <strong/>Method: {cart.paymentMethod}
+                                    <strong>Method:</strong> {cart.paymentMethod}
                                 </p>
                             </div>
                         </li>
@@ -102,24 +114,26 @@ export default function PlaceOrderPage(props) {
                             </li>
                             <li>
                                 <div className="row">
-                                    <div><strong />Order Total</div>
-                                    <div><strong/>${cart.totalPrice.toFixed(2)}</div>
+                                    <div><strong>Order Total</strong></div>
+                                    <div><strong>${cart.totalPrice.toFixed(2)}</strong></div>
                                 </div>
                             </li>
                             <li>
                                 <button 
                                     className="button" 
                                     onClick={placeOrderHandler} 
-                                    className="primary block"
+                                    className="block primary" 
                                     disabled={cart.cartItems.length === 0}
                                     >
                                     Place Order
                                 </button>
                             </li>
+                            { loading && <LoadingBox></LoadingBox> }
+                            { error && <MessageBox variant="danger">{error}</MessageBox>}
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
