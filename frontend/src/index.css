@@ -60,11 +60,19 @@ ul {
 li {
   margin-top: 1rem;
 }
+
+small {
+  padding: 1rem;
+  color: #757575;
+  cursor: default;
+}
+
 input,
 select,
 textarea,
 button {
-  padding: 1rem;
+  padding: 0.5rem;
+  margin: 1rem;
   border-radius: 0.5rem;
   border: 0.1rem #a4a4a4 solid;
   font-size: 1.6rem;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { savePaymentMethod } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 
-export default function PaymentMethodScreen(props) {
+export default function PaymentMethod(props) {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
   if (!shippingAddress.address) {
@@ -23,7 +23,7 @@ export default function PaymentMethodScreen(props) {
         <div>
           <h1>Payment Method</h1>
         </div>
-        <div>
+        <div className="card-body card">
           <div>
             <input
               type="radio"
@@ -34,10 +34,11 @@ export default function PaymentMethodScreen(props) {
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
-            <label htmlFor="CreditCard">Credit Card</label>
+              <label htmlFor="CreditCard">Credit Card</label>
           </div>
+          <p><small>Pay when you receive</small></p>
         </div>
-        <div>
+        <div className="card-body card">
           <div>
             <input
               type="radio"
@@ -49,6 +50,7 @@ export default function PaymentMethodScreen(props) {
             ></input>
             <label htmlFor="Cash">Cash On Delivery</label>
           </div>
+          <p><small>Click to add card</small></p>
         </div>
         <div>
           <label />

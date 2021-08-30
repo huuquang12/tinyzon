@@ -6,7 +6,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
 
-export default function ProductPage(props) {
+export default function Product(props) {
     const dispatch = useDispatch();
     const productId = props.match.params.id;
     const [qty, setQty] = useState(1);

@@ -5,7 +5,7 @@ import { detailsOrder } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-export default function OrderPage(props) {
+export default function Order(props) {
   const orderId = props.match.params.id;
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
@@ -49,9 +49,8 @@ export default function OrderPage(props) {
             </li>
             <li>
               <div className="card card-body">
-                <h2>Payment</h2>
                 <p>
-                  <strong>Method:</strong> {order.paymentMethod}
+                  <strong>Payment Method:</strong> {order.paymentMethod}
                 </p>
                 {order.isPaid ? (
                   <MessageBox variant="success">

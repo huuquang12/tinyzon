@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\..\\..\\..\\react-js\\tuts"
+		},
+		{
+			"path": "..\\..\\.."
+		},
+		{
+			"path": "..\\..\\..\\..\\..\\redux-js\\react-redux-tuts"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "tinyzon",
+		"git.ignoreLimitWarning": true
+	}
+}
