@@ -13,6 +13,8 @@ import PaymentMethodPage from './pages/PaymentMethodPage';
 import PlaceOrderPage from './pages/PlaceOrderPage';
 import OrderPage from './pages/OrderPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
+import ProfilePage from './pages/ProfilePage';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -52,6 +54,9 @@ function App() {
                   </Link>
                   <ul className="dropdown-content">
                     <li>
+                      <Link to="/profile">User Profile</Link>
+                    </li>
+                    <li>
                       <Link to="/orderhistory">Order History</Link>
                     </li>
                     <li>
@@ -77,6 +82,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOrderPage}></Route>
           <Route path="/order/:id" component={OrderPage}></Route>
           <Route path="/orderhistory" component={OrderHistoryPage}></Route>
+          <PrivateRoute path="/profile" component={ProfilePage}></PrivateRoute>
         </main>
         <footer className="row center">All right reserved</footer>
       </div>
