@@ -17,6 +17,7 @@ import Profile from './pages/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
 import ProductList from './pages/ProductList';
+import EditProduct from './pages/EditProduct';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -96,7 +97,8 @@ function App() {
           </header>
         <main>
           <Route path="/cart/:id?" component={Cart}></Route>
-          <Route path="/product/:id" component={Product}></Route>
+          <Route path="/product/:id" component={Product} exact></Route>
+          <Route path="/product/:id/edit" component={EditProduct} exact></Route>
           <Route path="/" component={Home} exact></Route>
           <Route path="/register" component={Register}></Route>
           <Route path="/signin" component={Signin}></Route>
