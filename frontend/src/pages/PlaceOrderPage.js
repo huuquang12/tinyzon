@@ -45,10 +45,10 @@ export default function PlaceOrderPage(props) {
                             <div className="card card-body">
                                 <h2>Shipping</h2>
                                 <p>
-                                    <strong>Name:</strong> {cart.shippingAddress.fullName}<br/>
+                                    <strong>Name:</strong> {cart.shippingAddress.fullName}.<br/>
                                     <strong>Address:</strong> {cart.shippingAddress.address},
-                                    {cart.shippingAddress.city}, {cart.shippingAddress.zipCode},
-                                    {cart.shippingAddress.country}
+                                    {cart.shippingAddress.city}, {cart.shippingAddress.country}.<br/>
+                                    <strong>Postal Code:</strong> {cart.shippingAddress.postalCode}.
                                 </p>
                             </div>
                         </li>

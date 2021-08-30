@@ -13,6 +13,11 @@ export default function OrderPage(props) {
   useEffect(() => {
     dispatch(detailsOrder(orderId));
   }, [dispatch, orderId]);
+
+  // const successPaymentHandler = (paymentResult) => {
+  //   dispatch(payOrder(order, paymentResult));
+  // }
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -27,11 +32,11 @@ export default function OrderPage(props) {
               <div className="card card-body">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:</strong> {order.shippingAddress.fullName} <br />
+                  <strong>Name:</strong> {order.shippingAddress.fullName}. <br />
                   <strong>Address: </strong> {order.shippingAddress.address},
                   {order.shippingAddress.city},{' '}
-                  {order.shippingAddress.postalCode},
-                  {order.shippingAddress.country}
+                  {order.shippingAddress.country}. <br/>
+                  <strong>Postal Code:</strong> {order.shippingAddress.postalCode}.
                 </p>
                 {order.isDelivered ? (
                   <MessageBox variant="success">

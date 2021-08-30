@@ -12,6 +12,7 @@ import ShippingAddressPage from './pages/ShippingAddressPage';
 import PaymentMethodPage from './pages/PaymentMethodPage';
 import PlaceOrderPage from './pages/PlaceOrderPage';
 import OrderPage from './pages/OrderPage';
+import OrderHistoryPage from './pages/OrderHistoryPage';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -50,7 +51,12 @@ function App() {
                         </i> 
                   </Link>
                   <ul className="dropdown-content">
-                    <Link to="#signout" onClick={signoutHandler}>Sign out</Link>
+                    <li>
+                      <Link to="/orderhistory">Order History</Link>
+                    </li>
+                    <li>
+                      <Link to="#signout" onClick={signoutHandler}>Sign out</Link>
+                    </li>
                   </ul>
                 </div>
               ) : 
@@ -70,6 +76,7 @@ function App() {
           <Route path="/payment" component={PaymentMethodPage}></Route>
           <Route path="/placeorder" component={PlaceOrderPage}></Route>
           <Route path="/order/:id" component={OrderPage}></Route>
+          <Route path="/orderhistory" component={OrderHistoryPage}></Route>
         </main>
         <footer className="row center">All right reserved</footer>
       </div>
