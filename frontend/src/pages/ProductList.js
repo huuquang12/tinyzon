@@ -19,7 +19,7 @@ export default function ProductList(props) {
       props.history.push(`/product/${createdProduct._id}/edit`);
     }
     dispatch(listProducts());
-  }, [createdProduct, dispatch, props.history.successCreate]);
+  }, [createdProduct, dispatch, props.history, successCreate]);
 
   const createHandler = () => {
     dispatch(createProduct());

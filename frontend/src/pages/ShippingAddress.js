@@ -26,7 +26,7 @@ export default function ShippingAddress(props) {
   };
   return (
     <div>
-      <CheckoutSteps steps1 steps2></CheckoutSteps>
+      <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Shipping Address</h1>
@@ -37,7 +37,7 @@ export default function ShippingAddress(props) {
             type="text"
             id="fullName"
             placeholder="Enter full name"
-            value={fullName}
+            value={fullName || ''}
             onChange={(e) => setFullName(e.target.value)}
             required
           ></input>
@@ -48,7 +48,7 @@ export default function ShippingAddress(props) {
             type="text"
             id="address"
             placeholder="Enter address"
-            value={address}
+            value={address || ''}
             onChange={(e) => setAddress(e.target.value)}
             required
           ></input>
@@ -59,7 +59,7 @@ export default function ShippingAddress(props) {
             type="text"
             id="city"
             placeholder="Enter city"
-            value={city}
+            value={city || ''}
             onChange={(e) => setCity(e.target.value)}
             required
           ></input>
@@ -70,7 +70,7 @@ export default function ShippingAddress(props) {
             type="text"
             id="postalCode"
             placeholder="Enter postal code"
-            value={postalCode}
+            value={postalCode || ''}
             onChange={(e) => setPostalCode(e.target.value)}
             required
           ></input>
@@ -81,7 +81,7 @@ export default function ShippingAddress(props) {
             type="text"
             id="country"
             placeholder="Enter country"
-            value={country}
+            value={country || ''}
             onChange={(e) => setCountry(e.target.value)}
             required
           ></input>

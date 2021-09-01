@@ -37,7 +37,7 @@ export default function PlaceOrder(props) {
     }, [dispatch, order, props.history, success]);
     return (
         <div>
-        <CheckoutSteps steps1 steps2 steps3 steps4></CheckoutSteps>
+        <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
             <div className="row top">
                 <div className="col-2">
                     <ul>
@@ -120,9 +120,8 @@ export default function PlaceOrder(props) {
                             </li>
                             <li>
                                 <button 
-                                    className="button" 
-                                    onClick={placeOrderHandler} 
-                                    className="block primary" 
+                                    className="primary block" 
+                                    onClick={placeOrderHandler}  
                                     disabled={cart.cartItems.length === 0}
                                     >
                                     Place Order

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 
@@ -18,8 +18,17 @@ import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
 import ProductList from './pages/ProductList';
 import EditProduct from './pages/EditProduct';
+import OrderList from './pages/OrderList';
+import SearchProduct from './pages/SearchProduct';
+import SearchBox from './components/SearchBox';
+import { listProductCategories } from './actions/productActions';
+import LoadingBox from './components/LoadingBox';
+import MessageBox from './components/MessageBox';
+import UserList from './pages/UserList';
 
 function App() {
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
@@ -29,17 +38,47 @@ function App() {
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(signout());
-  }
+  };
+
+  const productCategoryList = useSelector((state) => state.productCategoryList);
+  const {
+    loading: loadingCategories,
+    error: errorCategories,
+    categories,
+  } = productCategoryList;
+  useEffect(() => {
+    dispatch(listProductCategories());
+  }, [dispatch]);
 
   return (
     <BrowserRouter BrowserRouter>
       <div className="grid-container">
         <header className="row">
           <div>
+          <button
+              type="button"
+              className="open-sidebar"
+              onClick={() => setSidebarIsOpen(true)}
+            >
+              <i className="fa fa-bars"></i>
+            </button>
             <Link className="brand" to="/"> 
-              amazona
+              tinyzon
             </Link>
           </div>
+          {
+            userInfo ? (
+              <div>
+              <Route
+                render={({ history }) => (
+                  <SearchBox history={history}></SearchBox>
+                )}
+              ></Route>
+            </div>
+            ) : (
+              null
+            )
+          }
           <div>
           <Link to="/cart">
               Cart
@@ -79,9 +118,6 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
-                  <li>
                     <Link to="/productlist">Products</Link>
                   </li>
                   <li>
@@ -95,6 +131,36 @@ function App() {
             )}
           </div>
           </header>
+          <aside className={sidebarIsOpen ? 'open' : ''}>
+          <ul className="categories">
+            <li>
+              <strong>Categories</strong>
+              <button
+                onClick={() => setSidebarIsOpen(false)}
+                className="close-sidebar"
+                type="button"
+              >
+                <i className="fa fa-close"></i>
+              </button>
+            </li>
+            {loadingCategories ? (
+              <LoadingBox></LoadingBox>
+            ) : errorCategories ? (
+              <MessageBox variant="danger">{errorCategories}</MessageBox>
+            ) : (
+              categories.map((c) => (
+                <li key={c}>
+                  <Link
+                    to={`/search/category/${c}`}
+                    onClick={() => setSidebarIsOpen(false)}
+                  >
+                    {c}
+                  </Link>
+                </li>
+              ))
+            )}
+          </ul>
+        </aside>
         <main>
           <Route path="/cart/:id?" component={Cart}></Route>
           <Route path="/product/:id" component={Product} exact></Route>
@@ -107,8 +173,18 @@ function App() {
           <Route path="/placeorder" component={PlaceOrder}></Route>
           <Route path="/order/:id" component={Order}></Route>
           <Route path="/orderhistory" component={OrderHistory}></Route>
+          <Route path="/search/name/:name?" component={SearchProduct} exact></Route>
+          <Route
+            path="/search/category/:category"
+            component={SearchProduct}
+            exact
+          ></Route>
+          <Route path="/search/category/:category/name/:name" component={SearchProduct} exact></Route>
           <PrivateRoute path="/profile" component={Profile}></PrivateRoute>
           <AdminRoute path="/productlist" component={ProductList}></AdminRoute>
+          <AdminRoute path="/orderlist" component={OrderList}
+          ></AdminRoute>
+          <AdminRoute path="/userlist" component={UserList}></AdminRoute>
         </main>
         <footer className="row center">All right reserved</footer>
       </div>
