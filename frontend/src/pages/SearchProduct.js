@@ -6,9 +6,15 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Product from '../components/Products';
 
-
 export default function SearchProduct(props) {
-    const { name = 'all', category = 'all' } = useParams();
+  const {
+    name = 'all',
+    category = 'all',
+    brand = 'all',
+    min = 0,
+    max = 0,
+    order = 'lastest',
+  } = useParams();
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
@@ -18,20 +24,35 @@ export default function SearchProduct(props) {
       error: errorCategories,
       categories,
     } = productCategoryList;
+
+    const productBrandList = useSelector((state) => state.productBrandList);
+    const {
+      loading: loadingBrands,
+      error: errorBrands,
+      brands,
+    } = productBrandList;
     useEffect(() => {
-        dispatch(
-            listProducts({
-              name: name !== 'all' ? name : '',
-              category: category !== 'all' ? category : '',
-            })
-          );
-        }, [category, dispatch, name]);
+      dispatch(
+        listProducts({
+          name: name !== 'all' ? name : '',
+          category: category !== 'all' ? category : '',
+          brand: brand !== 'all' ? brand : '',
+          min,
+          max,
+          order,
+        })
+      );
+    }, [category, brand, dispatch, name, min, max, order]);
       
     const getFilterUrl = (filter) => {
         const filterCategory = filter.category || category;
+        const filterBrand = filter.brand || brand;
         const filterName = filter.name || name;
-        return `/search/category/${filterCategory}/name/${filterName}`;
-    };
+        const sortOrder = filter.order || order;
+        const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
+        const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
+        return `/search/category/${filterCategory}/brand/${filterBrand}/name/${filterName}/min/${filterMin}/max/${filterMax}/order/${sortOrder}`;    
+      };
     return (
     <div>
       <div className="row">
@@ -42,28 +63,66 @@ export default function SearchProduct(props) {
         ) : (
           <div>{products.length} Results</div>
         )}
+          <div className="sort">
+          Sort by{' '}
+          <select
+            value={order}
+            onChange={(e) => {
+              props.history.push(getFilterUrl({ order: e.target.value }));
+            }}
+          >
+            <option value="lastest">Lastest Arrivals</option>
+            <option value="lowest">Price: Low to High</option>
+            <option value="highest">Price: High to Low</option>
+          </select>
+        </div>
       </div>
       <div className="row top">
         <div className="col-1">
-          <h3>Department</h3>
-          {loadingCategories ? (
-            <LoadingBox></LoadingBox>
-          ) : errorCategories ? (
-            <MessageBox variant="danger">{errorCategories}</MessageBox>
-          ) : (
-            <ul>
-              {categories.map((c) => (
-                <li key={c}>
-                  <Link
-                    className={c === category ? 'active' : ''}
-                    to={getFilterUrl({ category: c })}
-                  >
-                    {c}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
+          <h3>Category</h3>
+          <div>
+            {loadingCategories ? (
+              <LoadingBox></LoadingBox>
+            ) : errorCategories ? (
+              <MessageBox variant="danger">{errorCategories}</MessageBox>
+            ) : (
+              <ul>
+                {categories.map((c) => (
+                  <li key={c}>
+                    <Link
+                      className={c === category ? 'active' : ''}
+                      to={getFilterUrl({ category: c })}
+                    >
+                      {c}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div>
+            <h3>Brand</h3>
+            <div>
+            {loadingBrands ? (
+              <LoadingBox></LoadingBox>
+            ) : errorBrands ? (
+              <MessageBox variant="danger">{errorBrands}</MessageBox>
+            ) : (
+              <ul>
+                {brands.map((b) => (
+                  <li key={b}>
+                    <Link
+                      className={b === brand ? 'active' : ''}
+                      to={getFilterUrl({ brand: b })}
+                    >
+                      {b}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          </div>
         </div>
         <div className="col-3">
           {loading ? (

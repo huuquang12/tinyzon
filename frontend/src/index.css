@@ -61,6 +61,11 @@ li {
   margin-top: 1rem;
 }
 
+label {
+  margin-left: 0.3rem;
+  margin-bottom: 1rem;
+}
+
 small {
   padding: 1rem;
   color: #757575;
@@ -73,16 +78,20 @@ textarea,
 button {
   padding: 1rem;
   border-radius: 0.5rem;
-  border: 0.1rem #a4a4a4 solid;
+  border: none;
   font-size: 1.6rem;
+  border: 0.1rem #404040 solid;
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
 button {
   background-color: #f8f8f8;
   cursor: pointer;
 }
+
 input:hover,
 select:hover,
 textarea:hover,
@@ -135,12 +144,14 @@ a.brand {
 .col-2 {
   flex: 2 1 50rem;
 }
+.col-3 {
+  flex: 32 1 75rem;
+}
 .min-30 {
   min-width: 30rem;
 }
 
-/* Asidebar */
-/* Aside */
+/* Asidebar */  
 aside {
   position: fixed;
   width: 30rem;
@@ -192,6 +203,7 @@ img.medium {
 img.large {
   width: 100%;
 }
+
 /* Card */
 .card {
   border: 0.1rem #c0c0c0 solid;
@@ -205,10 +217,10 @@ img.large {
 .card-body > * {
   margin-bottom: 0.5rem;
 }
-
 .price {
   font-size: 2rem;
 }
+
 /* Rating */
 .rating span {
   color: #f0c040;
@@ -250,21 +262,45 @@ img.large {
 }
 
 /* Form */
-
 .form {
   max-width: 60rem;
   margin: 0 auto;
-
 }
-
 .form > div {
   display: flex;
   flex-direction: column;
   margin: 1rem;
 }
-
 .form label {
   margin: 1rem 0;
+}
+
+.form-signin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 32rem;
+  padding: 2rem;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  list-style-type: none;
+}
+.form-container li {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+input {
+  padding: 1rem;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
 }
 
 /* Dropdown */
@@ -307,6 +343,9 @@ img.large {
 
 /* Credit Card - Modal */
 
+
+
+
 /* Table */
 .table {
   width: 100%;
@@ -318,7 +357,7 @@ img.large {
 }
 
 .table td, .table th {
-  text-align: left;
+  text-align: center;
   border: 0.1rem solid #e4e4e4;
   padding: 0.5rem;
 }
@@ -329,7 +368,6 @@ img.large {
 
 
 /* SearchBox */
-/* Search */
 .search button {
   width: 4.5rem;
   border-radius: 0 0.5rem 0.5rem 0;

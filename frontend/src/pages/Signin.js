@@ -32,48 +32,52 @@ export default function Signin(props) {
 
 
     return (
-        <div> 
-            <form className="form" onSubmit={submitHandler}>
-                <div>
-                    <h1>Sign in</h1>
-                </div>
-                { loading && <LoadingBox></LoadingBox>} 
-                { error && <MessageBox variant="danger">{error}</MessageBox> }
-                <div>
-                    <label htmlFor="email">Email address</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        placeholder="Enter email" 
-                        required
-                        onChange={ (e) => setEmail(e.target.value) }
-                    ></input>
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        placeholder="Enter password" 
-                        required
-                        onChange={ (e) => setPassword(e.target.value) }
-                    ></input>
-                </div>
-                <div>
+        <div className="form-signin"> 
+            <form onSubmit={submitHandler}>
+                <ul className="form-container">
+                    <li>
+                        <h1>Sign in</h1>
+                    </li>
+                    <li>
+                        { loading && <LoadingBox></LoadingBox>} 
+                        { error && <MessageBox variant="danger">{error}</MessageBox> }
+                    </li>
+                    <li>
+                        <label htmlFor="email">Email address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            placeholder="Enter email" 
+                            required
+                            onChange={ (e) => setEmail(e.target.value) }
+                        ></input>
+                     </li>
+                     <li>
+                        <label htmlFor="password">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            placeholder="Enter password" 
+                            required
+                            onChange={ (e) => setPassword(e.target.value) }
+                        ></input>
+                    </li>
+                    <li>
                     <label />
-                    <button 
-                        className="primary" 
-                        type="submit">
-                            Sign in
-                    </button>
-                </div>
-                <div>
-                    <label />
+                        <button 
+                            className="primary button" 
+                            type="submit">
+                                Sign in
+                        </button>
+                    </li>
                     <div>
-                        New customer? { ' ' }
-                        <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
+                        <label />
+                        <div>
+                            New customer? { ' ' }
+                            <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
+                        </div>
                     </div>
-                </div>
+                </ul>
             </form>
         </div>
     )

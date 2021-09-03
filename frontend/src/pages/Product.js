@@ -159,7 +159,7 @@ export default function Product(props) {
               ))}
               <li>
                 {userInfo ? (
-                  <form className="form" onSubmit={submitHandler}>
+                  <form className="form checkout" onSubmit={submitHandler}>
                     <div>
                       <h2>Write a customer review</h2>
                     </div>

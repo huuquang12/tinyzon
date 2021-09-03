@@ -21,7 +21,7 @@ import EditProduct from './pages/EditProduct';
 import OrderList from './pages/OrderList';
 import SearchProduct from './pages/SearchProduct';
 import SearchBox from './components/SearchBox';
-import { listProductCategories } from './actions/productActions';
+import { listProductCategories, listProductBrands } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import UserList from './pages/UserList';
@@ -48,6 +48,18 @@ function App() {
   } = productCategoryList;
   useEffect(() => {
     dispatch(listProductCategories());
+  }, [dispatch]);
+
+  const productBrandList = useSelector((state) => state.productBrandList);
+  const {
+    loading: loadingBrands,
+    error: errorBrands,
+    brands,
+  } = productBrandList;
+
+
+  useEffect(() => {
+    dispatch(listProductBrands());
   }, [dispatch]);
 
   return (
@@ -160,6 +172,27 @@ function App() {
               ))
             )}
           </ul>
+          <ul className="categories">
+            <li>
+              <strong>Brands</strong>
+            </li>
+            {loadingBrands ? (
+              <LoadingBox></LoadingBox>
+            ) : errorBrands ? (
+              <MessageBox variant="danger">{errorBrands}</MessageBox>
+            ) : (
+              brands.map((b) => (
+                <li key={b}>
+                  <Link
+                    to={`/search/brand/${b}`}
+                    onClick={() => setSidebarIsOpen(false)}
+                  >
+                    {b}
+                  </Link>
+                </li>
+              ))
+            )}
+          </ul>
         </aside>
         <main>
           <Route path="/cart/:id?" component={Cart}></Route>
@@ -175,11 +208,14 @@ function App() {
           <Route path="/orderhistory" component={OrderHistory}></Route>
           <Route path="/search/name/:name?" component={SearchProduct} exact></Route>
           <Route
-            path="/search/category/:category"
+            path="/search/category/:category/brand/:brand/name/:name/min/:min/max/:max/order/:order"
             component={SearchProduct}
             exact
           ></Route>
+          <Route path="/search/category/:category" component={SearchProduct} exact></Route>
           <Route path="/search/category/:category/name/:name" component={SearchProduct} exact></Route>
+          <Route path="/search/brand/:brand" component={SearchProduct} exact></Route>
+          <Route path="/search/brand/:brand/name/:name" component={SearchProduct} exact></Route>
           <PrivateRoute path="/profile" component={Profile}></PrivateRoute>
           <AdminRoute path="/productlist" component={ProductList}></AdminRoute>
           <AdminRoute path="/orderlist" component={OrderList}

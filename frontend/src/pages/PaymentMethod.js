@@ -10,6 +10,7 @@ export default function PaymentMethod(props) {
     props.history.push('/shipping');
   }
   const [paymentMethod, setPaymentMethod] = useState('Cash');
+
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -50,7 +51,9 @@ export default function PaymentMethod(props) {
             ></input>
               <label htmlFor="CreditCard">Credit Card</label>
           </div>
-          <p><small>Click to add card</small></p>
+          <p>
+            <small >Click to add card</small>
+          </p>
         </div>
         <div>
           <label />

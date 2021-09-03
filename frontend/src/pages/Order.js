@@ -32,10 +32,10 @@ export default function Order(props) {
               <div className="card card-body">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:</strong> {order.shippingAddress.fullName}. <br />
-                  <strong>Address: </strong> {order.shippingAddress.address},
-                  {order.shippingAddress.city},{' '}
-                  {order.shippingAddress.country}. <br/>
+                  <strong>Name:</strong> {order.shippingAddress.fullName}, <br />
+                  <strong>Address: </strong> {order.shippingAddress.address},{' '}
+                  {order.shippingAddress.country}, <br/>
+                  <strong>Phone Number: </strong> {order.shippingAddress.phone},<br/>
                   <strong>Postal Code:</strong> {order.shippingAddress.postalCode}.
                 </p>
                 {order.isDelivered ? (

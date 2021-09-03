@@ -46,8 +46,8 @@ export default function PlaceOrder(props) {
                                 <h2>Shipping</h2>
                                 <p>
                                     <strong>Name:</strong> {cart.shippingAddress.fullName}.<br/>
-                                    <strong>Address:</strong> {cart.shippingAddress.address},
-                                    {cart.shippingAddress.city}, {cart.shippingAddress.country}.<br/>
+                                    <strong>Address:</strong> {cart.shippingAddress.address}, {cart.shippingAddress.country}.<br/>
+                                    <strong>Phone Number:</strong> {cart.shippingAddress.phone},<br/> 
                                     <strong>Postal Code:</strong> {cart.shippingAddress.postalCode}.
                                 </p>
                             </div>
