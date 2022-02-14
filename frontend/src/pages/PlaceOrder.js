@@ -54,9 +54,8 @@ export default function PlaceOrder(props) {
                         </li>
                         <li>
                             <div className="card card-body">
-                                <h2>Payment</h2>
                                 <p>
-                                    <strong>Method:</strong> {cart.paymentMethod}
+                                    <strong>Payment Method:</strong> {cart.paymentMethod}
                                 </p>
                             </div>
                         </li>

@@ -3,19 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 
 import Home from './pages/Home'
-import Product from './pages/Product';
+import Products from './pages/Products';
 import Cart from './pages/Cart'
 import Signin from './pages/Signin';
 import { signout } from './actions/userActions';
 import Register from './pages/Register';
-import ShippingAddress from './pages/ShippingAddress';
-import PaymentMethod from './pages/PaymentMethod';
+
 import PlaceOrder from './pages/PlaceOrder';
 import Order from './pages/Order';
 import OrderHistory from './pages/OrderHistory';
 import Profile from './pages/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
+import SellerRoute from './components/SellerRoute'
+import SellerScreen from './pages/Seller';
 import ProductList from './pages/ProductList';
 import EditProduct from './pages/EditProduct';
 import OrderList from './pages/OrderList';
@@ -25,6 +26,9 @@ import { listProductCategories, listProductBrands } from './actions/productActio
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import UserList from './pages/UserList';
+import ShippingAddress from './pages/ShippingAddress';
+import PaymentMethod from './pages/PaymentMethod';
+import EditUser from './pages/EditUser';
 
 function App() {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -79,7 +83,7 @@ function App() {
             </Link>
           </div>
           {
-            userInfo ? (
+            userSignin ? (
               <div>
               <Route
                 render={({ history }) => (
@@ -108,7 +112,7 @@ function App() {
                   </Link>
                   <ul className="dropdown-content">
                     <li>
-                      <Link to="/profile">User Profile</Link>
+                      <Link to="/profile">Profile</Link>
                     </li>
                     <li>
                       <Link to="/orderhistory">Order History</Link>
@@ -123,6 +127,21 @@ function App() {
                 <Link to="/signin">Sign In</Link>
               )
             }
+            {userInfo && userInfo.isSeller && (
+              <div className="dropdown">
+                <Link to="#admin">
+                  Seller <i className="fa fa-caret-down"></i>
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/productlist/seller">Products</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderlist/seller">Orders</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
             { userInfo && userInfo.isAdmin && (
               <div className="dropdown">
                 <Link to="#admin">
@@ -195,10 +214,12 @@ function App() {
           </ul>
         </aside>
         <main>
+          <Route path="/seller/:id" component={SellerScreen}></Route>
           <Route path="/cart/:id?" component={Cart}></Route>
-          <Route path="/product/:id" component={Product} exact></Route>
+          <Route path="/product/:id" component={Products} exact></Route>
           <Route path="/product/:id/edit" component={EditProduct} exact></Route>
           <Route path="/" component={Home} exact></Route>
+          <Route path="/pageNumber/:pageNumber" component={Home}></Route>
           <Route path="/register" component={Register}></Route>
           <Route path="/signin" component={Signin}></Route>
           <Route path="/shipping" component={ShippingAddress}></Route>
@@ -208,7 +229,7 @@ function App() {
           <Route path="/orderhistory" component={OrderHistory}></Route>
           <Route path="/search/name/:name?" component={SearchProduct} exact></Route>
           <Route
-            path="/search/category/:category/brand/:brand/name/:name/min/:min/max/:max/order/:order"
+            path="/search/category/:category/brand/:brand/name/:name/min/:min/max/:max/order/:order/pageNumber/:pageNumber"
             component={SearchProduct}
             exact
           ></Route>
@@ -217,10 +238,29 @@ function App() {
           <Route path="/search/brand/:brand" component={SearchProduct} exact></Route>
           <Route path="/search/brand/:brand/name/:name" component={SearchProduct} exact></Route>
           <PrivateRoute path="/profile" component={Profile}></PrivateRoute>
-          <AdminRoute path="/productlist" component={ProductList}></AdminRoute>
-          <AdminRoute path="/orderlist" component={OrderList}
+          <AdminRoute
+            path="/productlist/pageNumber/:pageNumber"
+            component={ProductList}
           ></AdminRoute>
+          <AdminRoute
+            path="/productlist"
+            component={ProductList}
+            exact
+          ></AdminRoute>          
+          <AdminRoute
+            path="/user/:id/edit"
+            component={EditUser}
+          ></AdminRoute>          
+          <AdminRoute path="/orderlist" component={OrderList} exact></AdminRoute>
           <AdminRoute path="/userlist" component={UserList}></AdminRoute>
+          <SellerRoute
+            path="/productlist/seller"
+            component={ProductList}
+          ></SellerRoute>
+          <SellerRoute
+            path="/orderlist/seller"
+            component={OrderList}
+          ></SellerRoute>
         </main>
         <footer className="row center">All right reserved</footer>
       </div>

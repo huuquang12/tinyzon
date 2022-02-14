@@ -14,10 +14,6 @@ export default function Order(props) {
     dispatch(detailsOrder(orderId));
   }, [dispatch, orderId]);
 
-  // const successPaymentHandler = (paymentResult) => {
-  //   dispatch(payOrder(order, paymentResult));
-  // }
-
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (

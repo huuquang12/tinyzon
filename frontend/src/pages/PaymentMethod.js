@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { savePaymentMethod } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 
-export default function PaymentMethod(props) {
+export default function PaymentMethodScreen(props) {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
   if (!shippingAddress.address) {
     props.history.push('/shipping');
-  }
-  const [paymentMethod, setPaymentMethod] = useState('Cash');
+  };
 
+
+  const [paymentMethod, setPaymentMethod] = useState('Cash');
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ export default function PaymentMethod(props) {
     props.history.push('/placeorder');
   };
   return (
+    
     <div>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
@@ -26,7 +28,7 @@ export default function PaymentMethod(props) {
         </div>
         <div className="card-body card">
           <div>
-            <input
+          <input
               type="radio"
               id="Cash"
               value="Cash"
@@ -35,7 +37,7 @@ export default function PaymentMethod(props) {
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
-            <label htmlFor="Cash">Cash On Delivery</label>
+           <label htmlFor="Cash">Cash On Delivery</label>
           </div>
           <p><small>Pay when you receive</small></p>
         </div>
@@ -51,9 +53,8 @@ export default function PaymentMethod(props) {
             ></input>
               <label htmlFor="CreditCard">Credit Card</label>
           </div>
-          <p>
-            <small >Click to add card</small>
-          </p>
+            <p><small >Click to add card</small></p>
+          
         </div>
         <div>
           <label />

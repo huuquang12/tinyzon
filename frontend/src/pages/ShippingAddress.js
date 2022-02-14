@@ -36,7 +36,7 @@ export default function ShippingAddress(props) {
           <input
             type="text"
             id="fullName"
-            placeholder="Enter Full Name"
+            placeholder="Enter full name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
@@ -47,19 +47,19 @@ export default function ShippingAddress(props) {
           <input
             type="text"
             id="address"
-            placeholder="Enter Address"
+            placeholder="Enter address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="phone">Phone Number</label>
+          <label htmlFor="phone">Phone</label>
           <input
             type="tel"
-            pattern="0{1}[0-9]{9}"
             id="phone"
-            placeholder="Enter Phone Number"
+            pattern="[0-9]{10}"
+            placeholder="Enter Phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             required
@@ -70,7 +70,7 @@ export default function ShippingAddress(props) {
           <input
             type="text"
             id="postalCode"
-            placeholder="Enter Postal Code"
+            placeholder="Enter postal code"
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
             required
@@ -81,7 +81,7 @@ export default function ShippingAddress(props) {
           <input
             type="text"
             id="country"
-            placeholder="Enter Country"
+            placeholder="Enter country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required

@@ -26,14 +26,21 @@ import {
   PRODUCT_BRAND_LIST_FAIL,
 } from '../constants/productConstants';
 
-export const listProducts = ({ name='', category='', brand='', order='', min=0, max=0, }) => async (dispatch) => {
+export const listProducts = ({
+  pageNumber = '',
+  seller = '',
+  name = '',
+  category = '',
+  order = '',
+  min = 0,
+  max = 0,
+}) => async (dispatch) => {
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
     const { data } = await axios.get(
-      `/api/products?name=${name}&category=${category}&brand=${brand}&min=${min}&max=${max}&order=${order}`
-    );
+      `/api/products?pageNumber=${pageNumber}&seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&order=${order}` );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
@@ -165,4 +172,3 @@ export const createReview = (productId, review) => async (
     dispatch({ type: PRODUCT_REVIEW_CREATE_FAIL, payload: message });
   }
 };
-

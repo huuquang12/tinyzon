@@ -3,11 +3,19 @@ import bcrypt from 'bcryptjs';
 const data = {
     users: [
         {
-            name: 'Quang Do',
-            email: 'h.quang1200@gmail.com',
+            name: 'ADMIN',
+            email: 'admin@gmail.com',
             password: bcrypt.hashSync('123', 8),
             isAdmin: true,
-        },
+            isSeller: true,
+            seller: {
+              name: 'Puma',
+              logo: '/images/logo-addidas.png',
+              description: 'Best Seller',
+              rating: 4.5,
+              numReviews: 120,
+            },
+          },
         {
             name: 'Nhat Le',
             email: 'lmnhat@gmail.com',
@@ -16,17 +24,6 @@ const data = {
         }
     ],
     products: [
-      {
-        name: 'Nike Slim Shirt',
-        category: 'Shirts',
-        image: '/images/shirt-classic.jpg',
-        price: 120,
-        brand: 'Nike',
-        rating: 4.5,
-        numReviews: 10,
-        description: 'high quality product',
-        countInStock: 5,
-      },
       {
         name: 'Adidas Fit Shirt',
         category: 'Shirts',
